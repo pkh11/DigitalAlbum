@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Slide Show View Controller-->
+        <scene sceneID="q6S-Fc-2rh">
+            <objects>
+                <viewController storyboardIdentifier="slideShowViewController" id="dC4-mQ-pbU" customClass="SlideShowViewController" customModule="DigitalAlbum" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vph-4t-p3v">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PSz-3W-8cu">
+                                <rect key="frame" x="20" y="94" width="374" height="718"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ni7-fj-VjU">
+                                <rect key="frame" x="354" y="49" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="0rm-p7-9NO"/>
+                                    <constraint firstAttribute="width" constant="40" id="8CU-Jw-tiz"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <state key="normal" image="xmark" catalog="system"/>
+                                <connections>
+                                    <action selector="closeSlideShowView:" destination="dC4-mQ-pbU" eventType="touchUpInside" id="lxe-XI-Gjd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="VFG-qd-tG7"/>
+                        <color key="backgroundColor" red="0.066654182970000003" green="0.066673852500000005" blue="0.066652916369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="VFG-qd-tG7" firstAttribute="bottom" secondItem="PSz-3W-8cu" secondAttribute="bottom" constant="50" id="3D7-aY-XvX"/>
+                            <constraint firstItem="VFG-qd-tG7" firstAttribute="trailing" secondItem="Ni7-fj-VjU" secondAttribute="trailing" constant="20" id="9qv-dd-Ya5"/>
+                            <constraint firstItem="PSz-3W-8cu" firstAttribute="top" secondItem="VFG-qd-tG7" secondAttribute="top" constant="50" id="A1g-Qv-vRG"/>
+                            <constraint firstItem="PSz-3W-8cu" firstAttribute="top" secondItem="Ni7-fj-VjU" secondAttribute="bottom" constant="5" id="XWU-Ge-ou2"/>
+                            <constraint firstItem="Ni7-fj-VjU" firstAttribute="top" secondItem="VFG-qd-tG7" secondAttribute="top" constant="5" id="bj7-1P-66c"/>
+                            <constraint firstItem="VFG-qd-tG7" firstAttribute="trailing" secondItem="PSz-3W-8cu" secondAttribute="trailing" constant="20" id="ibv-V8-cTJ"/>
+                            <constraint firstItem="PSz-3W-8cu" firstAttribute="leading" secondItem="VFG-qd-tG7" secondAttribute="leading" constant="20" id="mAC-Y9-cDb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="slideShowView" destination="PSz-3W-8cu" id="VJi-vy-VLh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="INT-m3-48f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="113" y="72"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+    </resources>
+</document>
