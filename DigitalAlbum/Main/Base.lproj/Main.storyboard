@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -23,21 +22,21 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bV9-ft-wxp">
-                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="itemSize" width="130" height="140"/>
                                     <size key="headerReferenceSize" width="50" height="26"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCollectionViewCell" id="HqT-xO-dBs" customClass="PhotoCollectionViewCell" customModule="DigitalAlbum" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="26" width="120" height="150"/>
+                                        <rect key="frame" x="0.0" y="26" width="130" height="140"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="d5N-8Q-oyn">
-                                            <rect key="frame" x="0.0" y="0.0" width="120" height="150"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="130" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U18-kS-hYp">
-                                                    <rect key="frame" x="7" y="7" width="106" height="136"/>
+                                                    <rect key="frame" x="7" y="7" width="116" height="126"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -47,13 +46,12 @@
                                                 <constraint firstAttribute="trailing" secondItem="U18-kS-hYp" secondAttribute="trailing" constant="7" id="ydh-rU-qXr"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="120" height="150"/>
                                         <connections>
                                             <outlet property="imageView" destination="U18-kS-hYp" id="xtK-Rl-42F"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Zgk-u6-XHS" customClass="PhotoCollectionHeaderView" customModule="DigitalAlbum" customModuleProvider="target">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCollectionViewHeader" id="Zgk-u6-XHS" customClass="PhotoCollectionHeaderView" customModule="DigitalAlbum" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
@@ -74,28 +72,12 @@
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="css-1F-EdK">
-                                <rect key="frame" x="20" y="792" width="374" height="50"/>
-                                <color key="backgroundColor" name="AccentColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="9lT-k8-Z6U"/>
-                                </constraints>
-                                <state key="normal" title="슬라이드쇼 시작">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="startSlideShow:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a9r-1s-rqs"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Vck-eV-ucI" secondAttribute="bottom" id="QpE-eG-Tg3"/>
-                            <constraint firstItem="css-1F-EdK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="R7M-ab-Ufb"/>
                             <constraint firstItem="Vck-eV-ucI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="S67-Be-BgZ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="css-1F-EdK" secondAttribute="bottom" constant="20" id="XCc-fe-1AM"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="css-1F-EdK" secondAttribute="trailing" constant="20" id="gU0-1m-c6G"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Vck-eV-ucI" secondAttribute="trailing" id="kSI-Pl-ywQ"/>
                             <constraint firstItem="Vck-eV-ucI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="s7o-gn-r08"/>
                         </constraints>
@@ -107,9 +89,9 @@
                                     <action selector="moveToSettings:" destination="BYZ-38-t0r" id="uIA-kh-AN5"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" image="ellipsis" catalog="system" id="87E-4L-F8H">
+                            <barButtonItem title="Item" image="play.rectangle" catalog="system" id="87E-4L-F8H">
                                 <connections>
-                                    <action selector="pressOptionButton:" destination="BYZ-38-t0r" id="1KN-lP-iVB"/>
+                                    <action selector="startSlideShow:" destination="BYZ-38-t0r" id="bsD-o7-tZe"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -142,11 +124,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <image name="play.rectangle" catalog="system" width="128" height="93"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

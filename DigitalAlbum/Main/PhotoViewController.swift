@@ -11,6 +11,8 @@ class PhotoViewController: UIViewController {
 
     @IBOutlet var photoCollectionView: UICollectionView!
     let photoManager = PhotoManager.sharedInstance
+    var cellCount: Int = 3
+    var minSpacing: CGFloat = 1.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,41 +30,6 @@ class PhotoViewController: UIViewController {
             }
         }
     }
-
-    @IBAction func pressOptionButton(_ sender: Any) {
-        let selectAlert = UIAlertController(title: "목록보기", message: nil, preferredStyle: .actionSheet)
-        
-        let treeType = UIAlertAction(title: "3개", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-//            self.reLayout(3)
-        })
-        let twoType = UIAlertAction(title: "2개", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-//            self.reLayout(2)
-        })
-        
-        let oneType = UIAlertAction(title: "1개", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-//            self.reLayout(1)
-        })
-        
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: {
-            (alert: UIAlertAction!) -> Void in
-        })
-        
-        selectAlert.addAction(treeType)
-        selectAlert.addAction(twoType)
-        selectAlert.addAction(oneType)
-        selectAlert.addAction(cancelAction)
-        
-        self.present(selectAlert, animated: true, completion: nil)
-    }
-    
-    @IBAction func moveToSettings(_ sender: Any) {
-        let settingsStoryboard = UIStoryboard.init(name: "Settings", bundle: nil)
-        guard let settingsVC = settingsStoryboard.instantiateViewController(identifier: "settingsViewController") as? SettingsViewController else { return }
-        self.navigationController?.pushViewController(settingsVC, animated: true)
-    }
     
     @IBAction func startSlideShow(_ sender: Any) {
         let slideShowStoryboard = UIStoryboard.init(name: "SlideShow" , bundle: nil)
@@ -71,6 +38,12 @@ class PhotoViewController: UIViewController {
         }
         slideShowVC.modalPresentationStyle = .fullScreen
         self.present(slideShowVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func moveToSettings(_ sender: Any) {
+        let settingsStoryboard = UIStoryboard.init(name: "Settings", bundle: nil)
+        guard let settingsVC = settingsStoryboard.instantiateViewController(identifier: "settingsViewController") as? SettingsViewController else { return }
+        self.navigationController?.pushViewController(settingsVC, animated: true)
     }
 }
 
@@ -86,9 +59,10 @@ extension PhotoViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let collectionViewCellWithd = collectionView.frame.width / 3 - 1
+        let collectionViewCellWithd = collectionView.frame.width / CGFloat(cellCount) - minSpacing
         return CGSize(width: collectionViewCellWithd, height: collectionViewCellWithd)
     }
+
 }
 
 extension PhotoViewController: UICollectionViewDataSource {
@@ -114,6 +88,20 @@ extension PhotoViewController: UICollectionViewDataSource {
         }
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "photoCollectionViewHeader", for: indexPath) as? PhotoCollectionHeaderView else { return UICollectionReusableView() }
+            
+            if let countOfItems = photoManager.feed {
+                headerView.totalCount.text = "총 \(countOfItems.items.count)건"
+            }
+            return headerView
+        default:
+            fatalError("Unexpected element kind")
+        }
     }
 }
 

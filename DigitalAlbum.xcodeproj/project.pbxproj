@@ -162,12 +162,12 @@
 				6B22ACFD25FBBCE700C3D010 /* SlideShow */,
 				6B22ACFB25FBBCCE00C3D010 /* Main */,
 				6B22ACFC25FBBCD700C3D010 /* Settings */,
+				6B22AD1325FC5E2B00C3D010 /* NetworkManager.swift */,
 				6B22ACC525FBB42E00C3D010 /* AppDelegate.swift */,
 				6B22ACC725FBB42E00C3D010 /* SceneDelegate.swift */,
 				6B22ACCE25FBB42F00C3D010 /* Assets.xcassets */,
 				6B22ACD025FBB42F00C3D010 /* LaunchScreen.storyboard */,
 				6B22ACD325FBB42F00C3D010 /* Info.plist */,
-				6B22AD1325FC5E2B00C3D010 /* NetworkManager.swift */,
 			);
 			path = DigitalAlbum;
 			sourceTree = "<group>";

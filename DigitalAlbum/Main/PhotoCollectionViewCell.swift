@@ -22,4 +22,9 @@ class PhotoCollectionViewCell: UICollectionViewCell {
 
 class PhotoCollectionHeaderView: UICollectionReusableView {
     @IBOutlet weak var totalCount: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        totalCount.text = "총 건"
+    }
 }
