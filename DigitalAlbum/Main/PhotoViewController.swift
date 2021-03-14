@@ -28,6 +28,41 @@ class PhotoViewController: UIViewController {
             }
         }
     }
+
+    @IBAction func pressOptionButton(_ sender: Any) {
+        let selectAlert = UIAlertController(title: "목록보기", message: nil, preferredStyle: .actionSheet)
+        
+        let treeType = UIAlertAction(title: "3개", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+//            self.reLayout(3)
+        })
+        let twoType = UIAlertAction(title: "2개", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+//            self.reLayout(2)
+        })
+        
+        let oneType = UIAlertAction(title: "1개", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+//            self.reLayout(1)
+        })
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+        
+        selectAlert.addAction(treeType)
+        selectAlert.addAction(twoType)
+        selectAlert.addAction(oneType)
+        selectAlert.addAction(cancelAction)
+        
+        self.present(selectAlert, animated: true, completion: nil)
+    }
+    
+    @IBAction func moveToSettings(_ sender: Any) {
+        let settingsStoryboard = UIStoryboard.init(name: "Settings", bundle: nil)
+        guard let settingsVC = settingsStoryboard.instantiateViewController(identifier: "settingsViewController") as? SettingsViewController else { return }
+        self.navigationController?.pushViewController(settingsVC, animated: true)
+    }
     
     @IBAction func startSlideShow(_ sender: Any) {
         let slideShowStoryboard = UIStoryboard.init(name: "SlideShow" , bundle: nil)
@@ -40,12 +75,11 @@ class PhotoViewController: UIViewController {
 }
 
 extension PhotoViewController: UICollectionViewDelegateFlowLayout {
-    // 위 아래 간격
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 1
     }
 
-    // 옆 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1
     }
@@ -83,7 +117,4 @@ extension PhotoViewController: UICollectionViewDataSource {
     }
 }
 
-extension PhotoViewController: UICollectionViewDelegate {
-    
-}
 

@@ -11,23 +11,22 @@ import Kingfisher
 class SlideShowViewController: UIViewController {
     
     @IBOutlet weak var slideShowView: UIImageView!
+    
     var timer: Timer = Timer()
-    
-    let images = ["https://live.staticflickr.com/65535/51028317583_2d1a3d34f2_m.jpg",
-                  "https://live.staticflickr.com/65535/51029043151_be1c8292e6_m.jpg",
-                  "https://live.staticflickr.com/65535/51029044906_bd9965c9c5_m.jpg",
-                  "https://live.staticflickr.com/65535/51029044931_f4be3a47b4_m.jpg",
-                  "https://live.staticflickr.com/65535/51029045366_1c9d792073_m.jpg",
-                  "https://live.staticflickr.com/65535/51029046161_f6fa1ba8ae_m.jpg",
-                  "https://live.staticflickr.com/65535/51029142832_c9672b2eec_m.jpg"]
-    
     let photoManager = PhotoManager.sharedInstance
+    let settingsManager = SettingsManager.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var timeInterval: Double = 1.0
-        var index = 0
         
+        var index = 0
+        var timeInterval: Double = 1.0
+        if !settingsManager.timeInterval.isEmpty {
+            if let strToDouble = Double(settingsManager.timeInterval) {
+                timeInterval = strToDouble
+            }
+        }
+    
         timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { timer in
             // timerInterval : transitionStyle interval = 1: 0.6
             if let feed = self.photoManager.feed {
@@ -43,6 +42,7 @@ class SlideShowViewController: UIViewController {
         timer.fire()
         
     }
+    
     @IBAction func closeSlideShowView(_ sender: Any) {
         timer.invalidate()
         self.dismiss(animated: true, completion: nil)

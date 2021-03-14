@@ -9,21 +9,82 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var settingsTableView: UITableView!
+    
+    let slideShowTimes = Array(1...10).map{ String($0) }
+    let settingsManager = SettingsManager.sharedInstance
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        settingsTableView.delegate = self
+        settingsTableView.dataSource = self
+        
+    }
+}
+
+extension SettingsViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return slideShowTimes.count
     }
-    */
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return slideShowTimes[row]
+    }
+}
 
+extension SettingsViewController: UIPickerViewDelegate {
+
+}
+
+extension SettingsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "settingsTableViewCell") as? SettingsTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        let timeInterval = settingsManager.timeInterval
+        cell.updateUI(time: timeInterval)
+        
+        return cell
+    }
+}
+
+extension SettingsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // view
+        let vc = UIViewController()
+        vc.preferredContentSize = CGSize(width: self.view.frame.width, height: 200)
+        
+        // pickerview
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200))
+        
+        vc.view.addSubview(pickerView)
+        pickerView.centerXAnchor.constraint(equalTo: vc.view.centerXAnchor).isActive = true
+        pickerView.centerYAnchor.constraint(equalTo: vc.view.centerYAnchor).isActive = true
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        
+        // alert
+        let alert = UIAlertController(title: "슬라이드쇼 시간 선택", message: "", preferredStyle: .actionSheet)
+        alert.setValue(vc, forKey: "contentViewController")
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+            
+            let selectedRow = pickerView.selectedRow(inComponent: 0)
+            self.settingsManager.setTimeInterval(self.slideShowTimes[selectedRow])
+            self.settingsTableView.reloadData()
+            
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
 }

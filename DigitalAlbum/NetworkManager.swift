@@ -20,7 +20,7 @@ class NetworkManager {
     
     func getFeedList(completion: @escaping ((Feed?)->Void)) {
         let api = API.sharedInstance.PHOTOS
-        AF.request(api, parameters: ["format":"json", "nojsoncallback":"1"])
+        AF.request(api, parameters: ["format":"json", "nojsoncallback":"1", "lang":"ko-kr"])
             .validate(contentType: ["application/json"])
             .responseJSON { response in
             switch response.result {

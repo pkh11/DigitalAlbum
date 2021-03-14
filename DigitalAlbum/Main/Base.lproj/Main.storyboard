@@ -100,7 +100,20 @@
                             <constraint firstItem="Vck-eV-ucI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="s7o-gn-r08"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="전자 앨범" id="UX9-D4-2Zp"/>
+                    <navigationItem key="navigationItem" title="전자 앨범" id="UX9-D4-2Zp">
+                        <rightBarButtonItems>
+                            <barButtonItem image="gearshape" catalog="system" id="TuB-CH-PAx">
+                                <connections>
+                                    <action selector="moveToSettings:" destination="BYZ-38-t0r" id="uIA-kh-AN5"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="ellipsis" catalog="system" id="87E-4L-F8H">
+                                <connections>
+                                    <action selector="pressOptionButton:" destination="BYZ-38-t0r" id="1KN-lP-iVB"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="photoCollectionView" destination="Vck-eV-ucI" id="uZI-bZ-ifR"/>
                     </connections>
@@ -129,6 +142,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
+        <image name="gearshape" catalog="system" width="128" height="121"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
