@@ -19,14 +19,24 @@ class PhotoViewController: UIViewController {
         
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
+        photoCollectionView.refreshControl = UIRefreshControl()
+        photoCollectionView.refreshControl?.attributedTitle = NSAttributedString(string: "새로고침")
+        photoCollectionView.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
         fetchFeedandPhotos()
     }
     
+    @objc func refresh() {
+        fetchFeedandPhotos()
+        photoCollectionView.refreshControl?.endRefreshing()
+    }
+    
     func fetchFeedandPhotos() {
-        photoManager.fetchFeed { feed in
-            DispatchQueue.main.async {
-                self.photoCollectionView.reloadData()
+        photoManager.fetchFeed { isSuccess in
+            if isSuccess {
+                DispatchQueue.main.async {
+                    self.photoCollectionView.reloadData()
+                }
             }
         }
     }

@@ -29,6 +29,7 @@ class SlideShowViewController: UIViewController {
     
         timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { timer in
             // timerInterval : transitionStyle interval = 1: 0.6
+            
             if let feed = self.photoManager.feed {
                 let items = feed.items
                 let url = URL(string: items[index].media.m)
@@ -39,6 +40,7 @@ class SlideShowViewController: UIViewController {
                 }
             }
         }
+        
         timer.fire()
         
     }

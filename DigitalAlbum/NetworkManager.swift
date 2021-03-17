@@ -9,16 +9,13 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-
 class NetworkManager {
     
     static let sharedInstance = NetworkManager()
     
-    private init() {
-        
-    }
+    private init() {}
     
-    func getFeedList(completion: @escaping ((Feed?)->Void)) {
+    func getFeedList(completion: @escaping (Result<Data, Error>) -> Void) {
         let api = API.sharedInstance.PHOTOS
         AF.request(api, parameters: ["format":"json", "nojsoncallback":"1", "lang":"ko-kr"])
             .validate(contentType: ["application/json"])
@@ -26,13 +23,10 @@ class NetworkManager {
             switch response.result {
                 case .success(_):
                     if let data = response.data {
-                        let decoder = JSONDecoder()
-                        if let feed = try? decoder.decode(Feed.self, from: data) {
-                            completion(feed)
-                        }
+                        completion(.success(data))
                     }
                 case .failure(let error):
-                    print(error)
+                    completion(.failure(error))
             }
         }
     }

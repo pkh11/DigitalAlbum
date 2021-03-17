@@ -12,15 +12,21 @@ class PhotoManager {
     let networkManager = NetworkManager.sharedInstance
     var feed: Feed?
     
-    private init() {
-        
-    }
+    private init() { }
     
-    func fetchFeed(_ completion: @escaping ((Feed?)->Void)) {
-        networkManager.getFeedList { data in
-            guard let data = data else { return }
-            self.feed = data
-            completion(self.feed)
+    func fetchFeed(_ completion: @escaping ((Bool)->Void)) {
+        networkManager.getFeedList { result in
+            switch result {
+            case .success(let data):
+                let decoder = JSONDecoder()
+                if let feedData = try? decoder.decode(Feed.self, from: data) {
+                    self.feed = feedData
+                    completion(true)
+                }
+            case .failure(let error):
+                completion(false)
+                print("\(error)")
+            }
         }
     }
 }
