@@ -62,9 +62,9 @@ extension SettingsViewController: UITableViewDelegate {
         // view
         let vc = UIViewController()
         vc.preferredContentSize = CGSize(width: self.view.frame.width, height: 200)
-    
+        
         // pickerview
-        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.midY, height: 200))
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width - 40, height: 200))
         
         vc.view.addSubview(pickerView)
         pickerView.centerXAnchor.constraint(equalTo: vc.view.centerXAnchor).isActive = true
@@ -74,15 +74,14 @@ extension SettingsViewController: UITableViewDelegate {
         
         let alert = UIAlertController(title: "슬라이드쇼 시간 선택", message: "", preferredStyle: .actionSheet)
         
-        
         if UIDevice.current.userInterfaceIdiom == .pad {
             if let popoverController = alert.popoverPresentationController {
                 popoverController.sourceView = self.view
-                popoverController.sourceRect = CGRect(x: 0, y: self.view.bounds.midY, width: 0, height: 0)
+                popoverController.sourceRect = CGRect(x: 0, y: self.view.frame.maxY, width: 0, height: 200)
+                popoverController.permittedArrowDirections = []
             }
         }
         
-        alert.setValue(vc, forKey: "contentViewController")
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
             
             let selectedRow = pickerView.selectedRow(inComponent: 0)
@@ -90,7 +89,8 @@ extension SettingsViewController: UITableViewDelegate {
             self.settingsTableView.reloadData()
             
         }))
-        
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { _ in }))
+        alert.setValue(vc, forKey: "contentViewController")
         self.present(alert, animated: true, completion: nil)
     }
 }
